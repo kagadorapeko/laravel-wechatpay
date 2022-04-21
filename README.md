@@ -36,11 +36,14 @@ WECHATPAY_MERCHANT_KEY_PEM="
 ## 使用
 
 ```php
-$amount = 100; // 价格：1元
+// 价格：1元
+$amount = 100;
 
-$orderNo = '2022-03-22' // 订单号
+// 订单号
+$orderNo = '2022-03-22';
 
-$callbackUrl = 'https://www.google.com/'; //回调链接
+//回调链接
+$callbackUrl = 'https://www.google.com/';
 
 // 注入支付服务
 $wechatpayService = app(\KagaDorapeko\Laravel\Wechatpay\WechatpayService::class);
@@ -48,8 +51,11 @@ $wechatpayService = app(\KagaDorapeko\Laravel\Wechatpay\WechatpayService::class)
 // 获取支付凭证
 $payload = $wechatpayService->handleAppPayment($amount, $orderNo, $callbackUrl);
 
+// 注入请求
+$request = app(\Illuminate\Http\Request::class);
+
 // 支付回调验签并获取数据
-if (!$response = $wechatpayService->handelNotifyPayment(\Illuminate\Http\Request $request)) {
+if (!$response = $wechatpayService->handleNotifyPayment($request)) {
     throw new Exception('验签失败');
 }
 

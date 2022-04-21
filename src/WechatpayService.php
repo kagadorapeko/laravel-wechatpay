@@ -69,7 +69,7 @@ class WechatpayService
         ]);
     }
 
-    public function handelNotifyPayment(Request $request): array|null
+    public function handleNotifyPayment(Request $request): array|null
     {
         $requestSign = $request->header('Wechatpay-Signature');
         $requestNonceStr = $request->header('Wechatpay-Nonce');
